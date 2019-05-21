@@ -171,11 +171,12 @@ func (c *Client) newRequest(e Entry) *pb.ReportErrorEventRequest {
 	if r := e.Req; r != nil {
 		errorContext = &pb.ErrorContext{
 			HttpRequest: &pb.HttpRequestContext{
-				Method:    r.Method,
-				Url:       r.Host + r.RequestURI,
-				UserAgent: r.UserAgent(),
-				Referrer:  r.Referer(),
-				RemoteIp:  r.RemoteAddr,
+				Method:             r.Method,
+				Url:                r.Host + r.RequestURI,
+				UserAgent:          r.UserAgent(),
+				Referrer:           r.Referer(),
+				RemoteIp:           r.RemoteAddr,
+				ResponseStatusCode: int32(r.Response.StatusCode),
 			},
 		}
 	}
